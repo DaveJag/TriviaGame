@@ -1,2 +1,56 @@
 /* Dave Jagodowski - HW05 - Trivia Game */
 
+body  { 
+ /* background: #000000; */
+  color: #000000;
+  font-family: arial, helvetica, sans-serif;
+  font-size: 16px;
+  line-height: 24px;
+ }
+
+ h1  {
+ 	font-size: 4em;
+ 	line-height: 1.5em;
+ 	text-align: center;
+  font-weight: bold;
+ }
+
+h2  {
+	font-size: 2.8em;
+  line-height: 1.7em;
+  text-align: center;
+}
+
+h3  {
+  font-size: 1.4em;
+  line-height: 1.1em;
+  color: gold;
+  /*text-align: center; */ 
+}
+
+
+#container {
+  width: 1027px;
+  border: 4pt solid #000; 
+  border: 1px solid gold;
+ /* background-image: url("../images/background1.jpg");  */
+}
+
+
+#contentDiv {
+  width: 60%;
+  padding: 15px;
+  margin-left: auto;  /* center inside container div */
+  margin-right: auto;
+  margin-top: 50px;
+  font-size: .9em;
+  border: 1pt solid blue; 
+  color: black;
+}
+
+#startTextId {
+  text-align: center;
+  font-size: 2.0em;
+  line-height: 1.5em;
+}
+
