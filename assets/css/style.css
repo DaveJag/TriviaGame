@@ -36,6 +36,16 @@ h3  {
  /* background-image: url("../images/background1.jpg");  */
 }
 
+#titleDiv {
+  width: 60%;
+  padding: 15px;
+  margin-left: auto;  /* center inside container div */
+  margin-right: auto;
+  margin-top: 50px;
+  font-size: .9em;
+  border: 1pt solid turquoise; 
+  color: black;
+}
 
 #contentDiv {
   width: 60%;

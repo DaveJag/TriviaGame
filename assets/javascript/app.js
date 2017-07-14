@@ -6,31 +6,99 @@ $(document).ready(function() {
   
   var time = 10; // Sets length of gameplay. Initializes timer at 30 seconds.
   var intervalId;
-  timeUp = false;
+  var timeUp = false;
+  
+  var questions = [    //Declare  array
+  {
+   question: "What is another name for Superman?",
+   answers: {   //make each answer a property of questions.answers
+   	a: "The Caped Crusader",
+   	b: "The Red Redeemer",
+   	c: "The Man of Steel",
+   	d: "The Krypton Kid"
+   },
+   correctAnswer: "c"
+   }, //end question 
+
+   {
+   question: "What is Superman's only known weakness?",
+   answers: {
+   	a: "Lois Lane's Legs",
+   	b: "Kryptonite",
+   	c: "Samsonite",
+   	d: "Gambling"
+   },
+   correctAnswer: "b"
+   },
+   
+   {
+   question: "What is the name of Batman's secret identity?",
+   answers: {
+   	a: "Bat Boy",
+   	b: "The Caped Invader",
+   	c: "Bruce Willis",
+   	d: "Bruce Wayne"
+   },
+   correctAnswer: "d"
+   }]
+
 
   // On load, display Start screen information
   loadStartScreen();
-  // Listen for click event on START button and load the main game screen.
-  $("#startButtonId").click(loadGame);
-  setTimeout(countDown, 1000 * 1.8); //Provide a buffer before timer starts to allow elements to update in html.
-
+  loadGameScreen();
+ 
+  //showQuestions(questions);
 
 
 //FUNCTIONS
 
-function loadStartScreen() {
-  $("#contentDiv").html('<p id="startTextId"> Click the START button to begin. </p> <p style="text-align:center"> <img id="startButtonId" src="./assets/images/start_button.png"> </p>');
+  function foo() { 
+  };
+
+  function loadStartScreen() { //Draws the START button and prompt screen.
+    $("#titleDiv").html('<p id="startTextId">' + 
+    	'Click the START button to begin. </p>' +  
+    	'<p style="text-align:center"> <img id="startButtonId" src="./assets/images/start_button.png"> </p>');
+  }
+
+
+  function loadGameScreen() {
+	//Listen for click event on START button and load the main game screen.
+    $("startButtonId").off("click");
+    $("#startButtonId").click(function() { 
+      console.log("loadGameScreen function called.");
+	  // $("#contentDiv").html(""); //clears the div content.
+	  $("#titleDiv").html("<h1>Totally Trivial Trivia!");
+   	  //Display timer with 30 seconds on the clock
+	  $("#titleDiv").append('<h2>Time Remaining: <span id="timeDisplayId">' + '00:' + time + '</span></h2>'); 
+  
+      setTimeout(countDown, 1000 * .5); //initiate countdown timer after brief delay.
+    });      
+  };
+
+/* function showQuestions() {
+	var output = []; // stores the questions and answers.
+	var answers;
+
+    for (var i = 0; i < questions.length; i++) {   //for each question in array
+      answers = [] //reset answer list.
+      
+//
+      for (letter in questions[i].answers) {
+      	answers.push(  //push the code to create a radio button
+      		'<label>' 
+      		  + '<input type="radio" name="question" + i + "value=" + letter +">'
+			  + letter + ": " + questions[i].answers[letter] 
+			+ '</label>' );
+      }  
+      //Populate the output array with each question and its answers
+      output.push('<p class = "question">' + questions[i].question + '</p>' +  
+      	'<p class = "answers">' + answers.join("") + '</p>'); 
+    }
+   //$("#contentDiv").append(output.join(""));
 }
 
-
-function loadGame() {
-	console.log("loadGame function called.");
-	$("#contentDiv").html(""); //clears the div content.
-	$("#contentDiv").html("<h1>Totally Trivial Trivia!");
-
-	//Display timer with 30 seconds on the clock
-	$("#contentDiv").append('<h2>Time Remaining: <span id="timeDisplayId">' + '00:' + time + '</span></h2>'); 
-  }
+*/
 
 
 function countDown() {
