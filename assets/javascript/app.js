@@ -8,7 +8,7 @@ $(document).ready(function() {
   var intervalId;
   var timeUp = false;
   
-  var questions = [    //Declare  array
+  var questionArray = [    //Declare  array
   {
    question: "What is another name for Superman?",
    answers: {   //make each answer a property of questions.answers
@@ -45,11 +45,12 @@ $(document).ready(function() {
 
   // On load, display Start screen information
   loadStartScreen();
+  console.log("Main program ref 1");
   loadGameScreen();
+  console.log("Main program ref 2");
+  
  
-  //showQuestions(questions);
-
-
+  
 //FUNCTIONS
 
   function foo() { 
@@ -73,9 +74,28 @@ $(document).ready(function() {
 	  $("#titleDiv").append('<h2>Time Remaining: <span id="timeDisplayId">' + '00:' + time + '</span></h2>'); 
   
       setTimeout(countDown, 1000 * .5); //initiate countdown timer after brief delay.
+      showQuestion(); //Write the questions out.
     });      
   };
 
+  function showQuestion() {
+    var space = "&nbsp; &nbsp; &nbsp; ";
+    console.log("function showQuestion called");
+    //write 1 question out to the contentDiv
+    $("#contentDiv").append("<p>Question 1: " + questionArray[0].question + "</p>");
+    //write out possible answers
+    $//("#contentDiv").append("A. " + questionArray[0].answers.a + space + "B. " + questionArray[0].answers.b);
+    //incorporate a radio button.
+    $("#contentDiv").append('<input type="radio" name="q1" value="a1">' + questionArray[0].answers.a
+       + space + '<input type="radio" name="q1" value="a1">' + questionArray[0].answers.b   
+       + space + '<input type="radio" name="q1" value="a1">' + questionArray[0].answers.c
+       + space + '<input type="radio" name="q1" value="a1">' + questionArray[0].answers.d + "<br>" 
+    	);
+  }
+
+  function checkAnswer() {
+  	
+  }
 /* function showQuestions() {
 	var output = []; // stores the questions and answers.
 	var answers;

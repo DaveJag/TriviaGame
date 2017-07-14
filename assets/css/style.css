@@ -30,14 +30,14 @@ h3  {
 
 
 #container {
-  width: 1027px;
+  width: 1028px;
   border: 4pt solid #000; 
   border: 1px solid gold;
  /* background-image: url("../images/background1.jpg");  */
 }
 
 #titleDiv {
-  width: 60%;
+  width: 80%;
   padding: 15px;
   margin-left: auto;  /* center inside container div */
   margin-right: auto;
@@ -48,7 +48,7 @@ h3  {
 }
 
 #contentDiv {
-  width: 60%;
+  width: 80%;
   padding: 15px;
   margin-left: auto;  /* center inside container div */
   margin-right: auto;
