@@ -7,10 +7,10 @@ $(document).ready(function() {
   var time = 10; // Sets length of gameplay. Initializes timer at 30 seconds.
   var intervalId;
   var timeUp = false;
-  var radio1 = false;
-  var radio2 = false;
-  var radio3 = false;
-  var radio4 = false;
+  var myChoice = "";
+  var numCorrect = 0;
+  var numIncorrect = 0;
+
   
   var questionArray = [    //Declare  array
   {
@@ -38,9 +38,9 @@ $(document).ready(function() {
    {
    question: "What is the name of Batman's secret identity?",
    answers: {
-   	a: "Bat Boy",
+   	a: "Wayne Newton",
    	b: "The Caped Invader",
-   	c: "Bruce Willis",
+   	c: "Bruce Banner",
    	d: "Bruce Wayne"
    },
    correctAnswer: "d"
@@ -96,109 +96,96 @@ $(document).ready(function() {
     $("#answer4").html("D " + questionArray[0].answers.d);
 
 
-    $("#a1").click(function() {console.log("button a is checked")}); 
-    $("#a2").click(function() {console.log("button b is checked")}); 
-    $("#a3").click(function() {console.log("button c is checked")}); 
-    $("#a4").click(function() {console.log("button d is checked")}); 
-
-    //when a choice is made, check the answer.
- /*   if ($("#a1").checked = true ) {console.log("button a is checked")};
-    if ($("#a2").checked = true ) {console.log("button b is checked")};
-    if ($("#a3").checked = true ) {console.log("button c is checked")};
-    if ($("#a4").checked = true ) {console.log("button d is checked")};
-  */  
-//var selection = $('input[name="q1"]:checked').value;
-// console.log("You entered " + selection + "for your choice.");
-/* 
-    radio1 = $("#a1").checked;
-  	radio2 = $("#a2").checked;
-  	radio3 = $("#a3").checked;
-  	radio4 = $("#a4").checked;
-    console.log ("radio1 = " + radio1);
-    console.log ("radio2 = " + radio2);
-    console.log ("radio3 = " + radio3);
-    console.log ("radio4 = " + radio4);
-    return radio1, radio2, radio3, radio4
-  */
+    $("#a1").click(function() {
+      console.log("button a is checked");
+      myChoice = "a";
+      checkAnswer();
+      return myChoice});
+    $("#a2").click(function() { 
+      console.log("button b is checked");
+      myChoice = "b";
+      checkAnswer();
+      return myChoice}); 
+    $("#a3").click(function() {
+      console.log("button c is checked");
+      myChoice = "c";
+      checkAnswer();
+      return myChoice});
+    $("#a4").click(function() {
+      console.log("button d is checked");
+      myChoice = "d";
+      checkAnswer();
+      return myChoice}); 
+    
+     
+ /*   //when a choice is made, check the answer.
+    if ($("#a1").checked === true ) {console.log("button a is checked")};
+    if ($("#a2").checked === true ) {console.log("button b is checked")};
+    if ($("#a3").checked === true ) {console.log("button c is checked")};
+    if ($("#a4").checked === true ) {console.log("button d is checked")};
+ */
   }
 
   function checkAnswer() {
-  	console.log("function checkAnswer called.")
-
-
-
-    //for (var i=1; i<5; i++) {  //
-    //	if  
-    //}
-  }
-/* function showQuestions() {
-	var output = []; // stores the questions and answers.
-	var answers;
-
-    for (var i = 0; i < questions.length; i++) {   //for each question in array
-      answers = [] //reset answer list.
-      
-//
-      for (letter in questions[i].answers) {
-      	answers.push(  //push the code to create a radio button
-      		'<label>' 
-      		  + '<input type="radio" name="question" + i + "value=" + letter +">'
-			  + letter + ": " + questions[i].answers[letter] 
-			+ '</label>' );
+  	console.log("function checkAnswer called.");
+    console.log("The choice is " + myChoice);
+    //compare myChoice to correct answer
+    var correct = questionArray[0].correctAnswer;
+    if (myChoice === correct) {
+      console.log("correct answer selected");
+      numCorrect ++;
+    } else {
+         console.log("wrong answer selected");
+         numIncorrect ++;
       }  
-      //Populate the output array with each question and its answers
-      output.push('<p class = "question">' + questions[i].question + '</p>' +  
-      	'<p class = "answers">' + answers.join("") + '</p>'); 
-    }
-   //$("#contentDiv").append(output.join(""));
-}
-
-*/
-
-
-function countDown() {
-	console.log ("countDown function called");
-	intervalId = setInterval(count, 1000); //tell setInterval method to run the count function every 1 sec.
   }
 
 
-function count() {
-   console.log ("count function called")
-   time--; //decrement time variable by 1 (second)
-   var converted = timeConverter(time); //pass the new time to the timeConverter function.
-   $("#timeDisplayId").html(converted);
-   if (converted === "00:00") {
+
+//TIMING FUNCTIONS
+  function countDown() {
+	  console.log ("countDown function called");
+	  intervalId = setInterval(count, 1000); //tell setInterval method to run the count function every 1 sec.
+  }
+
+
+  function count() {
+    console.log ("count function called")
+    time--; //decrement time variable by 1 (second)
+    var converted = timeConverter(time); //pass the new time to the timeConverter function.
+    $("#timeDisplayId").html(converted);
+    if (converted === "00:00") {
    	stop();
    	console.log("function count - clock stopped");
    	timeUp = true;
    }
- }
+  }
 
 
- function stop() {
-   console.log("stop function called.");
-   clearInterval(intervalId); //stop the setInterval method from running.
- }
+  function stop() {
+    console.log("stop function called.");
+    clearInterval(intervalId); //stop the setInterval method from running.
+  }
 
 
-function timeConverter(t) {
+  function timeConverter(t) {
 
-  var minutes = Math.floor(t / 60); //convert seconds into minutes.
-  var seconds = t - (minutes * 60); //subtract all previous minutes from the count so only seconds remain.
+    var minutes = Math.floor(t / 60); //convert seconds into minutes.
+    var seconds = t - (minutes * 60); //subtract all previous minutes from the count so only seconds remain.
 
-  if (seconds < 10) {
+    if (seconds < 10) {
     seconds = "0" + seconds;  //If seconds are single digits, preceed it with a zero.
-  }
+    }
 
-  if (minutes === 0) {  
+    if (minutes === 0) {  
     minutes = "00";   //When there are only seconds to display, represent minutes with "00".
+    }
+    else if (minutes < 10) {
+      minutes = "0" + minutes;  //If minutes are single digits, preceed it with a zero.
+    }
+    //console.log ("timeConverter function called.")
+    return minutes + ":" + seconds;
   }
-  else if (minutes < 10) {
-    minutes = "0" + minutes;  //If minutes are single digits, preceed it with a zero.
-  }
-  //console.log ("timeConverter function called.")
-  return minutes + ":" + seconds;
- }
 
 
 }); //end document ready
