@@ -64,3 +64,10 @@ h3  {
   line-height: 1.5em;
 }
 
+#question,
+#answer1,
+#answer2, 
+#answer3,
+#answer4 {
+  font-size: 1em;
+}

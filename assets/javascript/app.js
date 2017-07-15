@@ -7,6 +7,10 @@ $(document).ready(function() {
   var time = 10; // Sets length of gameplay. Initializes timer at 30 seconds.
   var intervalId;
   var timeUp = false;
+  var radio1 = false;
+  var radio2 = false;
+  var radio3 = false;
+  var radio4 = false;
   
   var questionArray = [    //Declare  array
   {
@@ -80,21 +84,52 @@ $(document).ready(function() {
 
   function showQuestion() {
     var space = "&nbsp; &nbsp; &nbsp; ";
+    var selection = "";
     console.log("function showQuestion called");
     //write 1 question out to the contentDiv
-    $("#contentDiv").append("<p>Question 1: " + questionArray[0].question + "</p>");
-    //write out possible answers
-    $//("#contentDiv").append("A. " + questionArray[0].answers.a + space + "B. " + questionArray[0].answers.b);
-    //incorporate a radio button.
-    $("#contentDiv").append('<input type="radio" name="q1" value="a1">' + questionArray[0].answers.a
-       + space + '<input type="radio" name="q1" value="a1">' + questionArray[0].answers.b   
-       + space + '<input type="radio" name="q1" value="a1">' + questionArray[0].answers.c
-       + space + '<input type="radio" name="q1" value="a1">' + questionArray[0].answers.d + "<br>" 
-    	);
+    $("#question").html("Question 1: " + questionArray[0].question);
+    
+    //write out possible answers to input/radio button element in the html
+    $("#answer1").html("A " + questionArray[0].answers.a);
+    $("#answer2").html("B " + questionArray[0].answers.b);
+    $("#answer3").html("C " + questionArray[0].answers.c);
+    $("#answer4").html("D " + questionArray[0].answers.d);
+
+
+    $("#a1").click(function() {console.log("button a is checked")}); 
+    $("#a2").click(function() {console.log("button b is checked")}); 
+    $("#a3").click(function() {console.log("button c is checked")}); 
+    $("#a4").click(function() {console.log("button d is checked")}); 
+
+    //when a choice is made, check the answer.
+ /*   if ($("#a1").checked = true ) {console.log("button a is checked")};
+    if ($("#a2").checked = true ) {console.log("button b is checked")};
+    if ($("#a3").checked = true ) {console.log("button c is checked")};
+    if ($("#a4").checked = true ) {console.log("button d is checked")};
+  */  
+//var selection = $('input[name="q1"]:checked').value;
+// console.log("You entered " + selection + "for your choice.");
+/* 
+    radio1 = $("#a1").checked;
+  	radio2 = $("#a2").checked;
+  	radio3 = $("#a3").checked;
+  	radio4 = $("#a4").checked;
+    console.log ("radio1 = " + radio1);
+    console.log ("radio2 = " + radio2);
+    console.log ("radio3 = " + radio3);
+    console.log ("radio4 = " + radio4);
+    return radio1, radio2, radio3, radio4
+  */
   }
 
   function checkAnswer() {
-  	
+  	console.log("function checkAnswer called.")
+
+
+
+    //for (var i=1; i<5; i++) {  //
+    //	if  
+    //}
   }
 /* function showQuestions() {
 	var output = []; // stores the questions and answers.
