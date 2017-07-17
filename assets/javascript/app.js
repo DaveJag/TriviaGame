@@ -9,10 +9,12 @@ $(document).ready(function() {
   var timeUp = false;
   var answered = false;
   var myChoice = "";
-  var numQuestions = 3; //default number of questions asked per game.
+  var numQuestions = 5; //default number of questions asked per game.
   var numCorrect = 0;
   var numIncorrect = 0;
-
+  var className = "";
+  var divId = "1000";
+  var index = 0;
   
   var questionArray = [    //Declare  array
   {
@@ -46,7 +48,28 @@ $(document).ready(function() {
    	d: "Bruce Wayne"
    },
    correctAnswer: "d"
-   }]
+   },
+   {
+   question: "What is Superman's only known weakness?",
+   answers: {
+    a: "Lois Lane's Legs",
+    b: "Kryptonite",
+    c: "Samsonite",
+    d: "Gambling"
+   },
+   correctAnswer: "b"
+   },
+   {
+   question: "What is Superman's only known weakness?",
+   answers: {
+    a: "Lois Lane's Legs",
+    b: "Kryptonite",
+    c: "Samsonite",
+    d: "Gambling"
+   },
+   correctAnswer: "b"
+   }
+   ];
 
 
   // On load, display Start screen information
@@ -83,98 +106,147 @@ $(document).ready(function() {
 	  $("#titleDiv").append('<h2>Time Remaining: <span id="timeDisplayId">' + '00:' + time + '</span></h2>'); 
   
       setTimeout(countDown, 1000 * .5); //initiate countdown timer after brief delay.
-      showQuestion(); //Write the questions out.
+      showQuestions(); //Write the questions out.
     });      
   };
 
-  function showQuestion() {
-    var space = "&nbsp; &nbsp; &nbsp; ";
+  function showQuestions() {
+    var space = "&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;";
     console.log("function showQuestion called");
     for (var i=0; i<numQuestions; i++) {
-  
-
       //write question i out to the contentDiv
       var divId = "#div" + i;
       console.log("divId has value " + divId);
       //$("#question").html('Question '+(i+1) + ": " + questionArray[i].question);
       $(divId).prepend('<p>Question '+(i+1) + ": " + questionArray[i].question + '</p>'); 
       // write out form element to div  
-      var formName = "q" + i; // gives each <form> element a unique name. 
+      formName = "q" + i; // gives each <form> element a unique name. 
       var ans1 =  i + "answer1"; // 0answer1 -->gives each radio button a unique class. 
       var ans2 =  i + "answer2"; // 0answer2
       var ans3 =  i + "answer3"; // 0answer3 
       var ans4 =  i + "answer4"; // 0answer4
-      console.log("ans1 = " + ans1);
-      console.log("ans2 = " + ans2);
-      console.log("ans3 = " + ans3);
-      console.log("ans4 = " + ans4);
- 
-//Assign variables to each answer and read them into the form upon creation.
-      var choiceA = "A) " + questionArray[i].answers.a;
-      var choiceB = "B) " + questionArray[i].answers.b;
-      var choiceC = "C) " + questionArray[i].answers.c;
-      var choiceD = "D) " + questionArray[i].answers.d; 
-
+      /*console.log("ans1 = " + ans1);
+        console.log("ans2 = " + ans2);
+        console.log("ans3 = " + ans3);
+        console.log("ans4 = " + ans4); */
+        
+//Assign variables to each answer choice and read them into the form upon creation.
+      var choiceA = questionArray[i].answers.a + space;
+      var choiceB = questionArray[i].answers.b + space;
+      var choiceC = questionArray[i].answers.c + space;
+      var choiceD = questionArray[i].answers.d + space; 
+      /*console.log("choiceA = " + choiceA);
+        console.log("choiceB = " + choiceB);
+        console.log("choiceC = " + choiceC);
+        console.log("choiceD = " + choiceD); */
+      //Write radio button field out to each div 
       $(divId).append('<form>' +
-      '<input type="radio" name=formName id="a1" value="a">' + choiceA + '<input type="radio" name=formName id="a2" value="b">' + choiceB +   
-      '<input type="radio" name=formName id="a3" value="c">' + choiceC + '<input type="radio" name=formName id="a4" value="d">' + choiceD + 
+      '<input type="radio" name=formName class="a0" value="a">' + choiceA + '<input type="radio" name=formName class="a1" value="b">' + choiceB +   
+      '<input type="radio" name=formName class="a2" value="c">' + choiceC + '<input type="radio" name=formName class="a3" value="d">' + choiceD + 
       '</form>');
+      
+    } //end for i loop 
+    readAnswers();  
+   } // end function showQuestion()
+
+function getLastChar(divId) {  //Returns the last value of the divId string which identifies the div.
+  var myString = divId;
+  var stringLength = myString.length;
+  var lastChar = myString.charAt(stringLength - 1);
+  if (isNaN(lastChar) === false) {   // if it is a number...
+    index = parseInt(lastChar);
+    console.log("getLastChar: index = " + index);
+    return index;
+  }
+}
+
+ function getIndex() {
+    $('div').click(function() {
+    var divId = this.id;
+    console.log("divId is " + divId);
+    getLastChar(divId);
+    console.log("readanswers: index is " + index);
+    })
+  }
+
+  function readAnswers() {
+    console.log("function readAnswers called");
+
+      //Find out what question was clicked on by finding div Id.
+
+
+      $(".a0").click(function(getIndex) { 
+
+        //Find out what question was clicked on by finding div Id.
+  /*      $('div').click(function() {
+          var divId = this.id;
+          console.log("divId is " + divId);
+          getLastChar(divId);
+          console.log("readanswers: index is " + index);
+        }) */
+         console.log("button a is checked")
+         myChoice = "a"; 
+         var correct = questionArray[index].correctAnswer;
+         console.log("correct = " + correct);
+         checkAnswer(myChoice, correct);
+      }); 
+
+      $(".a1").click(function(getIndex) { 
         
+        //Find out what question was clicked on by finding div Id.
+  /*      $('div').click(function() {
+          var divId = this.id;
+          console.log("divId is " + divId);
+          getLastChar(divId);
+          console.log("readanswers: index is " + index);
+        }) */
+         console.log("button b is checked")
+         myChoice = "b"; 
+         var correct = questionArray[index].correctAnswer;
+         console.log("correct = " + correct);
+         checkAnswer(myChoice, correct);
+      }); 
 
-      //write out possible answers to input/radio button element in the html
-/*
-      var answerId1 = "."+ i + "answer1"; 
-      var answerId2 = "."+ i + "answer2"; 
-      var answerId3 = "."+ i + "answer3";
-      var answerId4 = "."+ i + "answer4";
+      $(".a2").click(function(getIndex) {
 
-       console.log("answerId1 has value " + answerId1);
-       console.log("answerId2 has value " + answerId2);
-       console.log("answerId3 has value " + answerId3);
-       console.log("answerId4 has value " + answerId4);
+        //Find out what question was clicked on by finding div Id.
+  /*      $('div').click(function() {
+          var divId = this.id;
+          console.log("divId is " + divId);
+          getLastChar(divId);
+          console.log("readanswers: index is " + index);
+        }) */
+         console.log("button c is checked")
+         myChoice = "c"; 
+         var correct = questionArray[index].correctAnswer;
+         console.log("correct = " + correct);
+         checkAnswer(myChoice, correct);
+      }); 
 
-      $(answerId1).html("A) " + questionArray[i].answers.a);
-      $(answerId2).html("B) " + questionArray[i].answers.b);
-      $(answerId3).html("C) " + questionArray[i].answers.c);
-      $(answerId4).html("D) " + questionArray[i].answers.d);
-*/     
-   } //end for loop 
+      $(".a3").click(function(getIndex) {
 
-      $("#a1").click(function() {
-        console.log("button a is checked");
-        myChoice = "a";
-        checkAnswer();
-        return myChoice}); 
-        
- 
-      $("#a2").click(function() { 
-        console.log("button b is checked");
-        myChoice = "b";
-        checkAnswer();
-        return myChoice}); 
-
-      $("#a3").click(function() {
-        console.log("button c is checked");
-        myChoice = "c";
-        checkAnswer();
-        return myChoice}); 
-
-      $("#a4").click(function() {
-        console.log("button d is checked");
-        myChoice = "d";
-        checkAnswer();
-        return myChoice}); 
+        //Find out what question was clicked on by finding div Id.
+  /*      $('div').click(function() {
+          var divId = this.id;
+          console.log("divId is " + divId);
+          getLastChar(divId);
+          console.log("readanswers: index is " + index);
+        }) */
+         console.log("button d is checked")
+         myChoice = "d"; 
+         var correct = questionArray[index].correctAnswer;
+         console.log("correct = " + correct);
+         checkAnswer(myChoice, correct);
+      }); 
+      }; //end function readAnswers.
+      
   
-          
-    //  } // end while
-  } // end function showQuestion()
 
 
-  function checkAnswer() {
+  function checkAnswer(myChoice, correct) {
   	console.log("function checkAnswer called.");
     console.log("The choice is " + myChoice);
     //compare myChoice to correct answer
-    var correct = questionArray[0].correctAnswer;
     if (myChoice === correct) {
       console.log("correct answer selected");
       numCorrect ++;

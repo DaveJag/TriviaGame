@@ -49,6 +49,8 @@ h3  {
 #div0,
 #div1,
 #div2,
+#div3,
+#div4,
 #contentDiv {
   width: 80%;
   padding: 15px;
@@ -76,3 +78,9 @@ h3  {
 .answer4 {
   font-size: 1em;
 }
+
+.index {
+  font-size: 1em;
+  color="orange";
+}
+/*Make the .index text invisible when finished.
