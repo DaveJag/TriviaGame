@@ -4,8 +4,9 @@ body  {
  /* background: #000000; */
   color: #000000;
   font-family: arial, helvetica, sans-serif;
-  font-size: 16px;
+  font-size: 22px;
   line-height: 24px;
+  background-color: #662A20;
  }
 
  h1  {
@@ -32,7 +33,12 @@ h3  {
 #container {
   width: 1080px;
   border: 4pt solid #000; 
-  border: 1px solid gold;
+  border: 12px solid gold;
+  background-color: black;
+  padding-bottom: 50px;
+  margin-left:auto;
+  margin-right:auto;
+  margin-top: 40px;
  /* background-image: url("../images/background1.jpg");  */
 }
 
@@ -43,14 +49,11 @@ h3  {
   margin-right: auto;
   margin-top: 50px;
   font-size: .9em;
-  border: 1pt solid turquoise; 
-  color: black;
+  /*border: 1pt solid turquoise; */
+  background-color: black;
+  color: gold;
 }
-#div0,
-#div1,
-#div2,
-#div3,
-#div4,
+
 #contentDiv {
   width: 80%;
   padding: 15px;
@@ -58,9 +61,43 @@ h3  {
   margin-right: auto;
   margin-top: 50px;
   font-size: .9em;
-  border: 1pt solid blue; 
-  color: black;
+  border: 5pt solid blue;  
+  color: gold;
+  background-color: black;
 }
+
+#startDiv {
+  width: 60%;
+  padding: 15px;
+  margin-left: auto;  /* center inside content div */
+  margin-right: auto;
+  margin-top: 50px;
+  font-size: .9em;
+  color: gold;
+  background-color: black;
+}
+
+
+#div0,
+#div1,
+#div2,
+#div3,
+#div4 {
+  width: 80%;
+  padding: 10px;
+  margin-left: auto;  /* center inside container div */
+  margin-right: auto;
+  margin-top: 10px;
+  font-size: .9em;
+  /* border: 1pt solid blue; */ 
+  color: #E99F00;
+  background-color: black;
+}
+
+#footerDiv {
+  background-color: #662A20;
+}
+
 
 #startTextId {
   text-align: center;
@@ -69,18 +106,35 @@ h3  {
 }
 
 #question {
-  font-size: 1em;
+  font-size: 1.2em;
+  line-height: 2.5em;
+  color: #4C4CFE;
  }
   
 .answer1,
 .answer2, 
 .answer3,
 .answer4 {
-  font-size: 1em;
+  font-size: 2em;
+
 }
 
-.index {
-  font-size: 1em;
-  color="orange";
+#startButtonId {
+  width: 30%;
+  height: 30%;
+  display: block;
+  margin: auto;
 }
-/*Make the .index text invisible when finished.
+#bannerId {
+  width: 100%;
+  height: 100%;
+  display: block;
+  margin: auto;
+}
+
+
+.score {
+  color: white;
+  font-size: 1.5em;
+  line-height: 2em;
+}

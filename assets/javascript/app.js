@@ -4,7 +4,7 @@ $(document).ready(function() {
 
 // MAIN PROGRAM
   
-  var time = 20; // Sets length of gameplay. Initializes timer at 30 seconds.
+  var time = 30; // Sets length of gameplay. Initializes timer at 30 seconds.
   var intervalId;
   var timeUp = false;
   var answered = false;
@@ -12,133 +12,133 @@ $(document).ready(function() {
   var numQuestions = 5; //default number of questions asked per game.
   var numCorrect = 0;
   var numIncorrect = 0;
-  var className = "";
-  var divId = "1000";
+  //var className = "";
+  var divId;
   var index = 0;
+  var stopped = false; 
   
   var questionArray = [    //Declare  array
   {
-   question: "What is another name for Superman?",
+   question: "What gift did Galadriel give to Gimli?",
    answers: {   //make each answer a property of questions.answers
-   	a: "The Caped Crusader",
-   	b: "The Red Redeemer",
-   	c: "The Man of Steel",
-   	d: "The Krypton Kid"
+   	a: "Lembas for food",
+   	b: "The Phial of Galadriel",
+   	c: "Nothing",
+   	d: "3 strands of her hair"
    },
-   correctAnswer: "c"
+   correctAnswer: "d"
    }, //end question 
 
    {
-   question: "What is Superman's only known weakness?",
+   question: "The Uruk-hai are bred from what two species?",
    answers: {
-   	a: "Lois Lane's Legs",
-   	b: "Kryptonite",
-   	c: "Samsonite",
-   	d: "Gambling"
+   	a: "Orcs and Men",
+   	b: "Men and Elf",
+   	c: "Orcs and Elf",
+   	d: "Elf and Dwarf"
    },
-   correctAnswer: "b"
+   correctAnswer: "a"
    },
    
    {
-   question: "What is the name of Batman's secret identity?",
+   question: "What do the elves call Gandalf?",
    answers: {
-   	a: "Wayne Newton",
-   	b: "The Caped Invader",
-   	c: "Bruce Banner",
-   	d: "Bruce Wayne"
+   	a: "Greyhame",
+   	b: "Stormcrow",
+   	c: "Lathspell",
+   	d: "Mithrandir "
    },
    correctAnswer: "d"
    },
    {
-   question: "What is Superman's only known weakness?",
+   question: "Who cut the Ring from Sauron's hand?",
    answers: {
-    a: "Lois Lane's Legs",
-    b: "Kryptonite",
-    c: "Samsonite",
-    d: "Gambling"
+    a: "Earendil",
+    b: "Calimehtar",
+    c: "Isildur",
+    d: "Elendil"
    },
-   correctAnswer: "b"
+   correctAnswer: "c"
    },
    {
-   question: "What is Superman's only known weakness?",
+   question: "What does Eowyn mean??",
    answers: {
-    a: "Lois Lane's Legs",
-    b: "Kryptonite",
-    c: "Samsonite",
-    d: "Gambling"
+    a: "Daughter of Kings",
+    b: "Shieldmaiden of Rohan",
+    c: "Horse Joy",
+    d: "Horse Lover"
    },
-   correctAnswer: "b"
+   correctAnswer: "c"
    }
    ];
 
 
   // On load, display Start screen information
   loadStartScreen();
-  console.log("Main program ref 1");
-  loadGameScreen();
-  console.log("Main program ref 2");
+ 
   
+  
+
  
   
 //FUNCTIONS
 
-  function foo() { 
-  };
-
   function loadStartScreen() { //Draws the START button and prompt screen.
    // document.getElementById("contentDiv").addEventListener("load",)
+    $("#startDiv").show(); //shows the Start div
     $("#contentDiv").hide(); //Hides the content div on this screen
-    $("#titleDiv").html('<p id="startTextId">' + 
-    	'Click the START button to begin. </p>' +  
-    	'<p style="text-align:center"> <img id="startButtonId" src="./assets/images/start_button.png"> </p>');
+    $("#titleDiv").html('<img id="bannerId" src="./assets/images/lotr_banner.png">');
+   // $("#contentDiv").show();
+    $("#startDiv").html('<img id="startButtonId" src="./assets/images/start_button.png">');
+    /*$("#div0").hide(); //Hides the content div on this screen
+    $("#div1").hide();
+    $("#div2").hide();
+    $("#div3").hide();
+    $("#div4").hide(); */
+    $("#startButtonId").click(loadGameScreen);
   }
 
 
   function loadGameScreen() {
 	//Listen for click event on START button and load the main game screen.
-    $("startButtonId").off("click");
-    $("#startButtonId").click(function() { 
-      console.log("loadGameScreen function called.");
+   // $("startButtonId").off("click");
+    $("#startDiv").hide();
+//    $("#startButtonId").click(function() { 
+    console.log("loadGameScreen function called.");
     $("#contentDiv").show(); //restore contentDiv  
 	  // $("#contentDiv").html(""); //clears the div content.
-	  $("#titleDiv").html("<h1>Totally Trivial Trivia!");
-   	  //Display timer with 30 seconds on the clock
+$("#titleDiv").html('<img id="bannerId" src="./assets/images/lotr_banner.png">');   	  //Display timer with 30 seconds on the clock
 	  $("#titleDiv").append('<h2>Time Remaining: <span id="timeDisplayId">' + '00:' + time + '</span></h2>'); 
   
+    $("#footerDiv").html('<p style="text-align:center"> <img id="doneButtonId" src="./assets/images/done_button.png"> </p>');
       setTimeout(countDown, 1000 * .5); //initiate countdown timer after brief delay.
-      showQuestions(); //Write the questions out.
-    });      
+      
+    showQuestions(); //Write the questions out to the html page.  
+
+    //Stop the clock if the Done image is clicked.
+    $("#doneButtonId").click(function(){
+    stopped = true;
+  });   
   };
 
-  function showQuestions() {
+  function showQuestions() {   //Writes 1 question out to each allocated div
     var space = "&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;";
-    console.log("function showQuestion called");
+    //console.log("function showQuestion called");
     for (var i=0; i<numQuestions; i++) {
-      //write question i out to the contentDiv
+      //write question i out to the Div[i]
       var divId = "#div" + i;
       console.log("divId has value " + divId);
       //$("#question").html('Question '+(i+1) + ": " + questionArray[i].question);
-      $(divId).prepend('<p>Question '+(i+1) + ": " + questionArray[i].question + '</p>'); 
+      $(divId).prepend('<p id="question">Question '+(i+1) + ": " + questionArray[i].question + '</p>'); 
       // write out form element to div  
       formName = "q" + i; // gives each <form> element a unique name. 
-      var ans1 =  i + "answer1"; // 0answer1 -->gives each radio button a unique class. 
-      var ans2 =  i + "answer2"; // 0answer2
-      var ans3 =  i + "answer3"; // 0answer3 
-      var ans4 =  i + "answer4"; // 0answer4
-      /*console.log("ans1 = " + ans1);
-        console.log("ans2 = " + ans2);
-        console.log("ans3 = " + ans3);
-        console.log("ans4 = " + ans4); */
         
 //Assign variables to each answer choice and read them into the form upon creation.
       var choiceA = questionArray[i].answers.a + space;
       var choiceB = questionArray[i].answers.b + space;
       var choiceC = questionArray[i].answers.c + space;
       var choiceD = questionArray[i].answers.d + space; 
-      /*console.log("choiceA = " + choiceA);
-        console.log("choiceB = " + choiceB);
-        console.log("choiceC = " + choiceC);
-        console.log("choiceD = " + choiceD); */
+
       //Write radio button field out to each div 
       $(divId).append('<form>' +
       '<input type="radio" name=formName class="a0" value="a">' + choiceA + '<input type="radio" name=formName class="a1" value="b">' + choiceB +   
@@ -159,79 +159,52 @@ function getLastChar(divId) {  //Returns the last value of the divId string whic
     return index;
   }
 }
-
- function getIndex() {
+  //Since each question is in its own sequentially numbered div (div0, div1, etc.),
+  //this function is supposed to capture which div was clicked in and use that info
+  //to know which question # was answered, so it can be referenced in the
+  //database. I could not get it to work, so scoring does not work in the game.  
+ function getIndex() {  
+    console.log("function getIndex");
     $('div').click(function() {
     var divId = this.id;
     console.log("divId is " + divId);
-    getLastChar(divId);
+    getLastChar(divId); //converts div name into a index number for questionArray
     console.log("readanswers: index is " + index);
+    return index;
     })
   }
 
   function readAnswers() {
     console.log("function readAnswers called");
-
-      //Find out what question was clicked on by finding div Id.
-
-
-      $(".a0").click(function(getIndex) { 
-
-        //Find out what question was clicked on by finding div Id.
-  /*      $('div').click(function() {
-          var divId = this.id;
-          console.log("divId is " + divId);
-          getLastChar(divId);
-          console.log("readanswers: index is " + index);
-        }) */
+      $(".a0").click(function() { 
          console.log("button a is checked")
          myChoice = "a"; 
+         getIndex();  //Finds out what question # was clicked on by finding its div Id.
          var correct = questionArray[index].correctAnswer;
          console.log("correct = " + correct);
          checkAnswer(myChoice, correct);
       }); 
 
-      $(".a1").click(function(getIndex) { 
-        
-        //Find out what question was clicked on by finding div Id.
-  /*      $('div').click(function() {
-          var divId = this.id;
-          console.log("divId is " + divId);
-          getLastChar(divId);
-          console.log("readanswers: index is " + index);
-        }) */
+      $(".a1").click(function() { 
          console.log("button b is checked")
          myChoice = "b"; 
+         getIndex();
          var correct = questionArray[index].correctAnswer;
          console.log("correct = " + correct);
          checkAnswer(myChoice, correct);
       }); 
 
-      $(".a2").click(function(getIndex) {
+      $(".a2").click(function() {
 
-        //Find out what question was clicked on by finding div Id.
-  /*      $('div').click(function() {
-          var divId = this.id;
-          console.log("divId is " + divId);
-          getLastChar(divId);
-          console.log("readanswers: index is " + index);
-        }) */
          console.log("button c is checked")
          myChoice = "c"; 
+         getIndex();
          var correct = questionArray[index].correctAnswer;
          console.log("correct = " + correct);
          checkAnswer(myChoice, correct);
       }); 
 
-      $(".a3").click(function(getIndex) {
-
-        //Find out what question was clicked on by finding div Id.
-  /*      $('div').click(function() {
-          var divId = this.id;
-          console.log("divId is " + divId);
-          getLastChar(divId);
-          console.log("readanswers: index is " + index);
-        }) */
+      $(".a3").click(function() {
          console.log("button d is checked")
          myChoice = "d"; 
          var correct = questionArray[index].correctAnswer;
@@ -250,9 +223,11 @@ function getLastChar(divId) {  //Returns the last value of the divId string whic
     if (myChoice === correct) {
       console.log("correct answer selected");
       numCorrect ++;
+      $("#numRight").html(numCorrect);
     } else {
          console.log("wrong answer selected");
          numIncorrect ++;
+         $("#numWrong").html(numIncorrect);
       }  
   }
 
@@ -266,14 +241,24 @@ function getLastChar(divId) {  //Returns the last value of the divId string whic
 
 
   function count() {
-    console.log ("count function called")
+    //console.log ("count function called")
     time--; //decrement time variable by 1 (second)
     var converted = timeConverter(time); //pass the new time to the timeConverter function.
     $("#timeDisplayId").html(converted);
+    var timeLeft = converted;
     if (converted === "00:00") {
-   	stop();
-   	console.log("function count - clock stopped");
-   	timeUp = true;
+   	  stop();
+   	  console.log("function count - time is up.");
+      $("#startDiv").show(); //shows the Start div
+      $("#startDiv").html('<h1>GAME OVER</h1>');
+   	  timeUp = true;
+   }  else if(stopped == true) {
+      console.log ("stopped = true" + stopped);
+      stop();
+      $("#timeDisplayId").html(timeLeft);
+      console.log("function count - clock stopped");
+      $("#startDiv").show(); //shows the Start div
+      $("#startDiv").html('<h2>You Finished in Time!</h2>');
    }
   }
 
